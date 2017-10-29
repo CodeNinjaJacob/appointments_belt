@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Login and Registration</title>
+    </head>
+
+    <body>
+        <div id='wrapper'>
+
+            <div class='form_container'>
+                <h2> Register </h2>
+                <form action='/register' method='POST'>
+                    {% csrf_token %}
+                    <div class='form_line'>
+                        <label for='name'> Name:<input class='input_data' type='text' name='name' id='name'/></label>
+                    </div>
+                    <div class='form_line'>
+                        <label for='alias'> Alias: <input class='input_data' type='text' name='alias' id='alias'/></label>
+                    </div>
+                    <div class='form_line'>
+                        <label for='email'> Email: <input class='input_data' type='email' name='email' id='email'/></label>
+                    </div>
+                    <div class='form_line'>
+                        <label for='password'> Password: <input class='input_data' type='password' name='password' id='password'/></label>
+                    </div>
+                    <div class='form_line'>
+                        <label for='password_confirm'> Confirm Password: <input class='input_data' type='password' name='password_confirm' id='password_confirm'/></label>
+                    </div>
+                    <div class='form_line'>
+                        <label for='birthday'> Date of Birth: <input class='input_data' type='date' name='birthday' id='birthday'/></label>
+                    </div>
+                    <div class='form_line'>
+                        <input class='submit_button' type='submit' name='submit' value='Register'/>
+                    </div>
+                </form>
+            </div>
+
+            <div id='error_message_box'>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li style="color:red">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            </div>
+
+            <div class='form_container'>
+                <h2> Login </h2>
+                <form action='/login' method='POST'>
+                    {% csrf_token %}
+                    <div class='form_line'>
+                        <label for='email'> Email: <input class='input_data' type='email' name='email'/></label>
+                    </div>
+                    <div class='form_line'>
+                        <label for='password'>Password:<input class='input_data' type='password' name='password'/></label>
+                    </div>
+                    <div class='form_line'>
+                        <input class='submit_button' type='submit' name='submit' value='Login'/>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </body>
+
+</html>

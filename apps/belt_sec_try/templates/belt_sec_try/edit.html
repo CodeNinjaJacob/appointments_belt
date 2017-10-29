@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+</head>
+<body>
+
+    <a href="/success">Dashboard</a>
+
+    <a href="/logout">Logout</a>
+
+
+
+    <form action="/makeedit/{{this_appointment.id}}" method="post">
+        {%csrf_token%}
+        <div class='form_line'>
+            <label for='task'> Tasks: <input class='input_data' type='task' name='task' id='task'/></label>
+        </div>
+        <div class='form_line'>
+            <p>Status:</p>
+                <select name="status">
+                    <option value="Done">Done</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Missed">Missed</option>
+                </select>
+        </div>
+        <div class='form_line'>
+            <label for='date'> Date:<input class='input_data' type='date' name='date' id='date'/></label>
+        </div>
+        <div class='form_line'>
+            <label for='time'> Time: <input class='input_data' type='time' name='time' id='time'/></label>
+        </div>
+        <input type="submit" name="go" value="Update">
+    </form>
+
+
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+
+</body>
+</html>

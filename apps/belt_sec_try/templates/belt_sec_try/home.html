@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+</head>
+<body>
+
+
+    <h1>Hello {{user.alias}}!</h1>
+
+
+
+    <a href="/logout">logout</a>
+
+
+
+    <h3>Here are your Appointments for today, {{today}}</h3>
+    <table>
+        <tr>
+            <th>Tasks</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        {% for x in current_appointments %}
+        <tr>
+            <td>{{x.task}}</td>
+            <td>{{x.time}}</td>
+            <td>{{x.status}}</td>
+            {% if x.status == "Pending" or x.status == "Missed" %}
+            <td><a href="/appointments/{{x.id}}">Edit</a><a href="/delete/{{x.id}}">Delete</a></td>
+            {% endif %}
+        </tr>
+        {%endfor%}
+    </table>
+
+
+
+
+
+    <h3>Your other appointments:</h3>
+    <table>
+        <tr>
+            <th>Tasks</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+        {% for i in other_appointments %}
+        <tr>
+            <td>{{i.task}}</td>
+            <td>{{i.date}}</td>
+            <td>{{i.time}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+
+
+
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+
+
+    <h3>Add Appointment:</h3>
+    <form action="/add" method="post">
+        {%csrf_token%}
+        <div class='form_line'>
+            <label for='date'> Date:<input class='input_data' type='date' name='date' id='date'/></label>
+        </div>
+        <div class='form_line'>
+            <label for='time'> Time: <input class='input_data' type='time' name='time' id='time'/></label>
+        </div>
+        <div class='form_line'>
+            <label for='task'> Tasks: <input class='input_data' type='task' name='task' id='task'/></label>
+        </div>
+        <input type="submit" name="go" value="Add">
+    </form>
+
+
+</body>
+</html>
